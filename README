@@ -1,0 +1,90 @@
+NAME
+    CPAN::Changes - Read and write Changes files
+
+SYNOPSIS
+        # Load from file
+        my $changes = CPAN::Changes->load( 'Changes' );
+
+        # Create a new Changes file
+        $changes = CPAN::Changes->new(
+            preamble => 'Revision history for perl module Foo::Bar'
+        );
+    
+        $changes->add_release( {
+            version => '0.01',
+            date    => '2009-07-06',
+        } );
+
+        $changes->serialize;
+
+DESCRIPTION
+    It is standard practice to include a Changes file in your distribution.
+    The purpose the Changes file is to help a user figure out what has
+    changed since the last release.
+
+    People have devised many ways to write the Changes file. A preliminary
+    specification has been created (CPAN::Changes::Spec) to encourage module
+    authors to write clear and concise Changes.
+
+    This module will help users programmatically read and write Changes
+    files that conform to the specification.
+
+METHODS
+  new( %args )
+    Creates a new object using %args as the initial data.
+
+  load( $filename )
+    Parses $filename as per CPAN::Changes::Spec.
+
+  load_string( $string )
+    Parses $string as per CPAN::Changes::Spec.
+
+  preamble( [ $preamble ] )
+    Gets/sets the preamble section.
+
+  releases( [ @releases ] )
+    Without any arguments, a list of current release objects is returned
+    sorted by ascending release date. When arguments are specified, all
+    existing releases are removed and replaced with the supplied
+    information. Each release may be either a regular hashref, or a
+    CPAN::Changes::Release object.
+
+        # Hashref argument
+        $changes->releases( { version => '0.01', date => '2009-07-06' } );
+    
+        # Release object argument
+        my $rel = CPAN::Changes::Release->new(
+            version => '0.01', date => '2009-07-06
+        );
+        $changes->releases( $rel );
+
+  add_release( @releases )
+    Adds the release to the changes file. If a release at the same version
+    exists, it will be overwritten with the supplied data.
+
+  delete_release( @versions )
+    Deletes all of the releases specified by the versions supplied to the
+    method.
+
+  release( $version )
+    Returns the release object for the specified version. Should there be no
+    matching release object, undef is returned.
+
+  serialize( )
+    Returns all of the data as a string, suitable for saving as a Changes
+    file.
+
+SEE ALSO
+    *   CPAN::Changes::Spec
+
+    *   Test::CPAN::Changes
+
+AUTHOR
+    Brian Cassidy <bricas@cpan.org>
+
+COPYRIGHT AND LICENSE
+    Copyright 2011 by Brian Cassidy
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
