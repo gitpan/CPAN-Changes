@@ -7,7 +7,7 @@ use CPAN::Changes::Release;
 use Text::Wrap   ();
 use Scalar::Util ();
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub new {
     my $class = shift;
@@ -49,7 +49,7 @@ sub load_string {
         if ( $l =~ m{^[v0-9]} ) {
 
             # currently ignores data after the date; could be useful later
-            my ( $v, $d ) = split( m{ }, $l );
+            my ( $v, $d ) = split( m{ +}, $l );
             push @releases,
                 CPAN::Changes::Release->new(
                 version => $v,
@@ -71,9 +71,11 @@ sub load_string {
 
         next if $l =~ m{^\s*$};
 
-        if ( !$indent ) {
-            $l =~ m{^(\s+)};
-            $indent = '\s' x length $1;
+        if ( !defined $indent ) {
+            $indent
+                = $l =~ m{^(\s+)}
+                ? '\s' x length $1
+                : '';
         }
 
         $l =~ s{^$indent}{};
