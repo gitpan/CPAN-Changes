@@ -1,5 +1,15 @@
 Revision history for perl module CPAN::Changes
 
+0.05 2011-02-13
+
+  - Attempt to squash warnings for undefined dates and add rudimentary
+    version sorting when dates are equal
+
+  - Add support for a "next version" token (Yanick Champoux)
+
+  - Proper definition of whitespace between version and date
+    (Fixes RT #65678)
+
 0.04 2011-02-10
 
   - Remove done_testing() from a test.

@@ -33,11 +33,18 @@ METHODS
   new( %args )
     Creates a new object using %args as the initial data.
 
-  load( $filename )
-    Parses $filename as per CPAN::Changes::Spec.
+    "next_token"
+        Used to passes a regular expression for a "next version" placeholder
+        token. See "DEALING WITH "NEXT VERSION" PLACEHOLDERS" for an example
+        of its usage.
 
-  load_string( $string )
-    Parses $string as per CPAN::Changes::Spec.
+  load( $filename, %args )
+    Parses $filename as per CPAN::Changes::Spec. If present, the optional
+    %args are passed to the underlaying call to "new()".
+
+  load_string( $string, %args )
+    Parses $string as per CPAN::Changes::Spec. If present, the optional
+    %args are passed to the underlaying call to "new()".
 
   preamble( [ $preamble ] )
     Gets/sets the preamble section.
@@ -73,6 +80,40 @@ METHODS
   serialize( )
     Returns all of the data as a string, suitable for saving as a Changes
     file.
+
+DEALING WITH "NEXT VERSION" PLACEHOLDERS
+    In the working copy of a distribution, it's not uncommon to have a "next
+    release" placeholder section as the first entry of the "Changes" file.
+
+    For example, the "Changes" file of a distribution using Dist::Zilla and
+    Dist::Zilla::Plugin::NextRelease would look like:
+
+        Revision history for Foo-Bar
+
+        {{$NEXT}}
+            - Add the 'frobuscate' method.
+
+        1.0.0     2010-11-30
+            - Convert all comments to Esperanto.
+
+        0.0.1     2010-09-29
+            - Original version unleashed on an unsuspecting world
+
+    To have "CPAN::Changes" recognizes the "{{$NEXT}}" token as a valid
+    version, you can use the "next_token" argument with any of the class'
+    constructors. Note that the resulting release object will also be
+    considered the latest release, regardless of its timestamp.
+
+    To continue with our example:
+
+        # recognizes {{$NEXT}} as a version
+        my $changes = CPAN::Changes->load( 
+            'Changes',
+            next_token => qr/{{\$NEXT}}/,
+        );
+
+        my @releases = $changes->releases;
+        print $releases[-1]->version;       # prints '{{$NEXT}}'
 
 SEE ALSO
     *   CPAN::Changes::Spec
