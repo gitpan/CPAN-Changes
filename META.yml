@@ -21,8 +21,9 @@ no_index:
     - xt
 requires:
   Text::Wrap: 0
-  perl: 5.6.0
+  perl: 5.8.0
+  version: 0
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/bricas/cpan-changes
-version: 0.05
+version: 0.06
