@@ -26,6 +26,7 @@ t/corpus/multiple_releases.changes
 t/corpus/no-leading-space-for-change.changes
 t/corpus/preamble.changes
 t/corpus/space-before-date.changes
+t/corpus/timestamp.changes
 t/dist-zilla-changes.t
 t/read_basic.t
 t/read_different-indentation.t
@@ -36,6 +37,7 @@ t/read_multiple_releases.t
 t/read_no-leading-space-for-change.t
 t/read_preamble.t
 t/read_space-before-date.t
+t/read_timestamp.t
 t/self.t
 t/serialize.t
 xt/release/pod.t
