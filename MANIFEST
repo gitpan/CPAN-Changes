@@ -19,6 +19,7 @@ README
 t/corpus/basic.changes
 t/corpus/different-indentation.changes
 t/corpus/dist-zilla.changes
+t/corpus/dist-zilla_format.changes
 t/corpus/group-brackets.changes
 t/corpus/group.changes
 t/corpus/line-continuation.changes
@@ -30,6 +31,7 @@ t/corpus/timestamp.changes
 t/dist-zilla-changes.t
 t/read_basic.t
 t/read_different-indentation.t
+t/read_dist-zilla.t
 t/read_group-brackets.t
 t/read_group.t
 t/read_line-continuation.t
