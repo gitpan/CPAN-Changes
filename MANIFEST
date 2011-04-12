@@ -28,6 +28,7 @@ t/corpus/no-leading-space-for-change.changes
 t/corpus/preamble.changes
 t/corpus/space-before-date.changes
 t/corpus/timestamp.changes
+t/delete_empty_groups.t
 t/dist-zilla-changes.t
 t/read_basic.t
 t/read_different-indentation.t

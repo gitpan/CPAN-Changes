@@ -81,6 +81,9 @@ METHODS
     Returns all of the data as a string, suitable for saving as a Changes
     file.
 
+  delete_empty_groups( )
+    Deletes change groups without changes in all releases.
+
 DEALING WITH "NEXT VERSION" PLACEHOLDERS
     In the working copy of a distribution, it's not uncommon to have a "next
     release" placeholder section as the first entry of the "Changes" file.
