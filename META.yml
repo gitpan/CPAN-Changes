@@ -22,8 +22,8 @@ no_index:
 requires:
   Text::Wrap: 0
   perl: 5.10.0
-  version: 0
+  version: 0.79
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/bricas/cpan-changes
-version: 0.16
+version: 0.17

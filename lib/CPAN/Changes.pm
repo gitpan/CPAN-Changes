@@ -8,7 +8,7 @@ use Text::Wrap   ();
 use Scalar::Util ();
 use version      ();
 
-our $VERSION = '0.16';
+our $VERSION = '0.17';
 
 # From DateTime::Format::W3CDTF
 our $W3CDTF_REGEX = qr{(\d\d\d\d) # Year
@@ -24,7 +24,6 @@ our $W3CDTF_REGEX = qr{(\d\d\d\d) # Year
                    | [+-]\d\d:\d\d    # Hour:Minute TZ offset
                      (?::\d\d)?       # :Second TZ offset
                  )?)?)?)?}x;
-
 
 my @m = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
 my %months = map { $m[ $_ ] => $_ + 1 } 0 .. 11;
@@ -107,8 +106,8 @@ sub load_string {
                 }
 
                 # handle dist-zilla style, again ingoring TZ data
-                elsif (
-                    $d =~ m{(\d{4}-\d\d-\d\d)\s+(\d\d:\d\d(?::\d\d)?)(\s+\D+)?} )
+                elsif ( $d
+                    =~ m{(\d{4}-\d\d-\d\d)\s+(\d\d:\d\d(?::\d\d)?)(\s+\D+)?} )
                 {
                     $d = sprintf( '%sT%sZ', $1, $2 );
                 }
@@ -246,11 +245,16 @@ sub delete_empty_groups {
 
 sub serialize {
     my $self = shift;
+    my %args = @_;
+
+    my %release_args;
+    $release_args{ group_sort } = $args{ group_sort } if $args{ group_sort };
 
     my $output;
 
     $output = $self->preamble . "\n\n" if $self->preamble;
-    $output .= join( "\n", $_->serialize ) for reverse $self->releases;
+    $output .= join "\n", $_->serialize( %release_args )
+        for reverse $self->releases;
 
     return $output;
 }
@@ -356,10 +360,14 @@ Deletes all of the releases specified by the versions supplied to the method.
 Returns the release object for the specified version. Should there be no 
 matching release object, undef is returned.
 
-=head2 serialize( )
+=head2 serialize( group_sort => \&sorting_function )
 
 Returns all of the data as a string, suitable for saving as a Changes 
 file.
+
+If I<group_sort> is provided, change groups are
+sorted according to the given function. If not,
+groups are sorted alphabetically.
 
 =head2 delete_empty_groups( )
 

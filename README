@@ -77,9 +77,12 @@ METHODS
     Returns the release object for the specified version. Should there be no
     matching release object, undef is returned.
 
-  serialize( )
+  serialize( group_sort => \&sorting_function )
     Returns all of the data as a string, suitable for saving as a Changes
     file.
+
+    If *group_sort* is provided, change groups are sorted according to the
+    given function. If not, groups are sorted alphabetically.
 
   delete_empty_groups( )
     Deletes change groups without changes in all releases.

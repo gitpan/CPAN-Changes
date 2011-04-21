@@ -43,5 +43,6 @@ t/read_space-before-date.t
 t/read_timestamp.t
 t/self.t
 t/serialize.t
+t/sort_groups.t
 xt/release/pod.t
 xt/release/pod_coverage.t
