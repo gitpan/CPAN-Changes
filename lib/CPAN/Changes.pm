@@ -8,7 +8,7 @@ use Text::Wrap   ();
 use Scalar::Util ();
 use version      ();
 
-our $VERSION = '0.18';
+our $VERSION = '0.19';
 
 # From DateTime::Format::W3CDTF
 our $W3CDTF_REGEX = qr{(\d\d\d\d) # Year
@@ -129,7 +129,7 @@ sub load_string {
         }
 
         # Grouping
-        if ( $l =~ m{^\s+\[\s*(.+)\s*\]\s*$} ) {
+        if ( $l =~ m{^\s+\[\s*(.+?)\s*\]\s*$} ) {
             $ingroup = $1;
             $releases[ -1 ]->add_group( $1 );
             next;
@@ -197,9 +197,18 @@ sub releases {
     }
 
     my $sort_function = sub {
-        ( eval { version->parse( $a->version ) } || 0 )
-            <=> ( eval { version->parse( $b->version ) } || 0 )
-            or ( $a->date || '' ) cmp( $b->date || '' );
+        (   eval {
+                ( my $v = $a->version ) =~ s/-TRIAL$//;
+                version->parse( $v );
+            }
+                || 0
+            ) <=> (
+            eval {
+                ( my $v = $b->version ) =~ s/-TRIAL$//;
+                version->parse( $v );
+            }
+                || 0
+            ) or ( $a->date || '' ) cmp( $b->date || '' );
     };
 
     my $next_token = $self->{ next_token };

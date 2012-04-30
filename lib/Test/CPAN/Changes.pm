@@ -7,7 +7,7 @@ use CPAN::Changes;
 use Test::Builder;
 use version ();
 
-our $VERSION = '0.18';
+our $VERSION = '0.19';
 
 my $Test     = Test::Builder->new;
 
@@ -58,7 +58,10 @@ sub changes_file_ok {
             $Test->diag( '  ERR: ' . $_->date );
             return;
         }
-        if ( $_->version !~ m{^$version::LAX$} ) {
+
+        # strip off -TRIAL before testing
+        (my $version = $_->version) =~ s/-TRIAL$//;
+        if ( not version::is_lax($version) ) {
             $Test->ok( 0, "$file contains an invalid version number" );
             $Test->diag( '  ERR: ' . $_->version );
             return;
