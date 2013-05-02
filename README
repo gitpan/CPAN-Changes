@@ -61,7 +61,7 @@ METHODS
     
         # Release object argument
         my $rel = CPAN::Changes::Release->new(
-            version => '0.01', date => '2009-07-06
+            version => '0.01', date => '2009-07-06'
         );
         $changes->releases( $rel );
 
@@ -77,9 +77,12 @@ METHODS
     Returns the release object for the specified version. Should there be no
     matching release object, undef is returned.
 
-  serialize( group_sort => \&sorting_function )
+  serialize( reverse => $boolean, group_sort => \&sorting_function )
     Returns all of the data as a string, suitable for saving as a Changes
     file.
+
+    If *reverse* is provided and true, the releases are printed in the
+    reverse order (oldest to latest).
 
     If *group_sort* is provided, change groups are sorted according to the
     given function. If not, groups are sorted alphabetically.
@@ -130,7 +133,7 @@ AUTHOR
     Brian Cassidy <bricas@cpan.org>
 
 COPYRIGHT AND LICENSE
-    Copyright 2011 by Brian Cassidy
+    Copyright 2011-2013 by Brian Cassidy
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

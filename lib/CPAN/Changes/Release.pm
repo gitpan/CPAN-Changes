@@ -100,7 +100,8 @@ sub delete_group {
 sub delete_empty_groups {
     my $self = shift;
 
-    $self->delete_group( grep { !@{ $self->changes( $_ ) } } $self->groups );
+    $self->delete_group($_) 
+        for grep { !@{ $self->changes( $_ ) } } $self->groups;
 }
 
 sub serialize {
@@ -245,7 +246,7 @@ Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2011 by Brian Cassidy
+Copyright 2011-2013 by Brian Cassidy
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 

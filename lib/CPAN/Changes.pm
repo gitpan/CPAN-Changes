@@ -8,7 +8,7 @@ use Text::Wrap   ();
 use Scalar::Util ();
 use version      ();
 
-our $VERSION = '0.19';
+our $VERSION = '0.20';
 
 # From DateTime::Format::W3CDTF
 our $W3CDTF_REGEX = qr{(\d\d\d\d) # Year
@@ -262,8 +262,11 @@ sub serialize {
     my $output;
 
     $output = $self->preamble . "\n\n" if $self->preamble;
-    $output .= join "\n", $_->serialize( %release_args )
-        for reverse $self->releases;
+
+    my @r = $self->releases;
+    @r = reverse @r unless $args{reverse};  # not a typo!
+
+    $output .= $_->serialize( %release_args ) for @r;
 
     return $output;
 }
@@ -351,7 +354,7 @@ may be either a regular hashref, or a L<CPAN::Changes::Release> object.
     
     # Release object argument
     my $rel = CPAN::Changes::Release->new(
-        version => '0.01', date => '2009-07-06
+        version => '0.01', date => '2009-07-06'
     );
     $changes->releases( $rel );
 
@@ -369,10 +372,13 @@ Deletes all of the releases specified by the versions supplied to the method.
 Returns the release object for the specified version. Should there be no 
 matching release object, undef is returned.
 
-=head2 serialize( group_sort => \&sorting_function )
+=head2 serialize( reverse => $boolean, group_sort => \&sorting_function )
 
 Returns all of the data as a string, suitable for saving as a Changes 
 file.
+
+If I<reverse> is provided and true, the releases are
+printed in the reverse order (oldest to latest).
 
 If I<group_sort> is provided, change groups are
 sorted according to the given function. If not,
@@ -437,7 +443,7 @@ Brian Cassidy E<lt>bricas@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2011 by Brian Cassidy
+Copyright 2011-2013 by Brian Cassidy
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
