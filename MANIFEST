@@ -25,11 +25,13 @@ t/corpus/dist-zilla_format.changes
 t/corpus/group-brackets.changes
 t/corpus/group.changes
 t/corpus/line-continuation.changes
+t/corpus/long_preamble.changes
 t/corpus/multiple_releases.changes
 t/corpus/no-leading-space-for-change.changes
 t/corpus/preamble.changes
 t/corpus/space-before-date.changes
 t/corpus/timestamp.changes
+t/corpus/unknown_date.changes
 t/delete_empty_groups.t
 t/dist-zilla-changes.t
 t/read_basic.t
@@ -40,9 +42,11 @@ t/read_group.t
 t/read_line-continuation.t
 t/read_multiple_releases.t
 t/read_no-leading-space-for-change.t
+t/read_no_date.t
 t/read_preamble.t
 t/read_space-before-date.t
 t/read_timestamp.t
+t/read_unknown_date.t
 t/self.t
 t/serialize.t
 t/sort_groups.t
