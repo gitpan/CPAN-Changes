@@ -50,5 +50,6 @@ t/read_unknown_date.t
 t/self.t
 t/serialize.t
 t/sort_groups.t
+t/valid_dates.t
 xt/release/pod.t
 xt/release/pod_coverage.t
