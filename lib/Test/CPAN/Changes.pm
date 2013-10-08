@@ -7,7 +7,7 @@ use CPAN::Changes;
 use Test::Builder;
 use version ();
 
-our $VERSION = '0.24';
+our $VERSION = '0.25';
 
 my $Test     = Test::Builder->new;
 
@@ -62,7 +62,7 @@ sub changes_file_ok {
         my $d = $_->{ _parsed_date };
         if ( $d !~ m[^${CPAN::Changes::W3CDTF_REGEX}$]
                 && $d !~ m[^(${CPAN::Changes::UNKNOWN_VALS})$] ) {
-            $Test->carp( 'Date "' . $d . '" is not in the recommend format' );
+            $Test->carp( 'Date "' . $d . '" is not in the recommended format' );
         }
 
         # strip off -TRIAL before testing
