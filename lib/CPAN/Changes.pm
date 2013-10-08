@@ -8,7 +8,7 @@ use Text::Wrap   ();
 use Scalar::Util ();
 use version      ();
 
-our $VERSION = '0.23';
+our $VERSION = '0.24';
 
 # From DateTime::Format::W3CDTF
 our $W3CDTF_REGEX = qr{(\d\d\d\d) # Year
@@ -118,9 +118,9 @@ sub load_string {
                     );
                 }
 
-                # handle dist-zilla style, again ingoring TZ data
+                # handle dist-zilla style, puts TZ data in note
                 elsif ( $n
-                    =~ m{^((\d{4}-\d\d-\d\d)\s+(\d\d:\d\d(?::\d\d)?)(?:\s+[A-Za-z]+/[A-Za-z_-]+))} )
+                    =~ m{^((\d{4}-\d\d-\d\d)\s+(\d\d:\d\d(?::\d\d)?))(?:\s+[A-Za-z]+/[A-Za-z_-]+)} )
                 {
                     $match = $1;
                     $d = sprintf( '%sT%sZ', $2, $3 );
