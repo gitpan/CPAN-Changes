@@ -27,4 +27,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: http://github.com/bricas/cpan-changes
-version: 0.25
+version: 0.26

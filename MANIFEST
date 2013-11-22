@@ -47,6 +47,7 @@ t/read_preamble.t
 t/read_space-before-date.t
 t/read_timestamp.t
 t/read_unknown_date.t
+t/rt90605.t
 t/self.t
 t/serialize.t
 t/sort_groups.t
