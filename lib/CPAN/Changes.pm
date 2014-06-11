@@ -7,7 +7,7 @@ use CPAN::Changes::Release;
 use Scalar::Util ();
 use version      ();
 
-our $VERSION = '0.27';
+our $VERSION = '0.28';
 
 # From DateTime::Format::W3CDTF
 our $W3CDTF_REGEX = qr{(\d\d\d\d) # Year
@@ -126,8 +126,8 @@ sub load_string {
                 }
 
                 # start with W3CDTF, ignore rest
-                elsif ( $n =~ m{^($W3CDTF_REGEX)}p ) {
-                    $match = ${^MATCH};
+                elsif ( $n =~ m{^($W3CDTF_REGEX)} ) {
+                    $match = $1;
                     $d = $match;
                     $d =~ s{ }{T};
                     # Add UTC TZ if date ends at H:M, H:M:S or H:M:S.FS
@@ -456,6 +456,16 @@ To continue with our example:
 =item * L<CPAN::Changes::Spec>
 
 =item * L<Test::CPAN::Changes>
+
+=back
+
+=head2 SIMILAR MODULES
+
+=over 4
+
+=item * L<Module::Metadata::Changes>
+
+=item * L<Module::Changes>
 
 =back
 

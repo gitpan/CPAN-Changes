@@ -129,6 +129,11 @@ SEE ALSO
 
     *   Test::CPAN::Changes
 
+  SIMILAR MODULES
+    *   Module::Metadata::Changes
+
+    *   Module::Changes
+
 AUTHOR
     Brian Cassidy <bricas@cpan.org>
 
