@@ -10,6 +10,7 @@ inc/Module/Install/Scripts.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/CPAN/Changes.pm
+lib/CPAN/Changes/Group.pm
 lib/CPAN/Changes/Release.pm
 lib/CPAN/Changes/Spec.pod
 lib/Test/CPAN/Changes.pm
