@@ -36,6 +36,7 @@ t/corpus/unknown_date.changes
 t/corpus/version-date-separator.changes
 t/delete_empty_groups.t
 t/dist-zilla-changes.t
+t/moo_lazy_subclass.t
 t/read_basic.t
 t/read_different-indentation.t
 t/read_dist-zilla.t
